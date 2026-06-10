@@ -4,7 +4,9 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
-export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+export interface PaginatedResponse<T> {
+  success: boolean;
+  data: T[];
   total: number;
   page: number;
   limit: number;

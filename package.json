@@ -2,6 +2,8 @@
   "name": "marvel-showcase",
   "scripts": {
     "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "dev:back": "pnpm --filter backend dev",
+    "dev:front": "pnpm --filter frontend dev",
     "build": "pnpm --filter shared build && pnpm --filter backend build && pnpm --filter frontend build",
     "lint": "pnpm -r lint"
   },
