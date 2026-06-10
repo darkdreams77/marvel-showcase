@@ -1,0 +1,428 @@
+/* ============================================================
+   MARVEL THEME — Tailwind CSS v4 (CSS-first, @theme)
+   Inspiré de la DA commune : marvel.com, Marvel Unlimited,
+   MCU promotional sites, Disney+ Marvel hub
+   ============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ──────────────────────────────────────────
+     COULEURS
+     ────────────────────────────────────────── */
+
+  /* Rouge Marvel — la couleur signature */
+  --color-marvel-50: #fff0f0;
+  --color-marvel-100: #ffd6d6;
+  --color-marvel-200: #ffa8a8;
+  --color-marvel-300: #ff6b6b;
+  --color-marvel-400: #f53b3b;
+  --color-marvel-500: #ed1d24; /* Rouge Marvel officiel */
+  --color-marvel-600: #c8111a;
+  --color-marvel-700: #a00c14;
+  --color-marvel-800: #78090f;
+  --color-marvel-900: #50060a;
+  --color-marvel-950: #2e0305;
+
+  /* Noir profond — surface principale */
+  --color-void-50: #f2f2f2;
+  --color-void-100: #d9d9d9;
+  --color-void-200: #a6a6a6;
+  --color-void-300: #737373;
+  --color-void-400: #404040;
+  --color-void-500: #1f1f1f;
+  --color-void-600: #141414;
+  --color-void-700: #0d0d0d; /* Fond principal Marvel */
+  --color-void-800: #080808;
+  --color-void-900: #050505;
+  --color-void-950: #020202;
+
+  /* Or légende — pour les héros, titres premium */
+  --color-legend-50: #fefbf0;
+  --color-legend-100: #fdf3c6;
+  --color-legend-200: #fae080;
+  --color-legend-300: #f5c842;
+  --color-legend-400: #f0b429; /* Or Marvel */
+  --color-legend-500: #d4960f;
+  --color-legend-600: #a8730a;
+  --color-legend-700: #7c5207;
+  --color-legend-800: #503305;
+  --color-legend-900: #2e1c03;
+  --color-legend-950: #1a1002;
+
+  /* Énergie bleue — pouvoirs, interfaces tech (Iron Man, Captain Marvel) */
+  --color-arc-50: #eff9ff;
+  --color-arc-100: #c7eeff;
+  --color-arc-200: #8adeff;
+  --color-arc-300: #4fc3f7; /* Arc reactor bleu */
+  --color-arc-400: #1da3e8;
+  --color-arc-500: #0b80c4;
+  --color-arc-600: #075e96;
+  --color-arc-700: #044270;
+  --color-arc-800: #02294a;
+  --color-arc-900: #011628;
+  --color-arc-950: #000c17;
+
+  /* Acier — surfaces secondaires, cards */
+  --color-steel-50: #f5f5f4;
+  --color-steel-100: #e0dfdd;
+  --color-steel-200: #c4c3c0;
+  --color-steel-300: #a3a19d;
+  --color-steel-400: #7d7b76;
+  --color-steel-500: #5c5a55;
+  --color-steel-600: #3d3b38;
+  --color-steel-700: #282724;
+  --color-steel-800: #1a1917;
+  --color-steel-900: #121110;
+  --color-steel-950: #0a0908;
+
+  /* ──────────────────────────────────────────
+     TYPOGRAPHIE
+     ────────────────────────────────────────── */
+
+  /* Marvel utilise Roboto Condensed + une display ultra-bold */
+  --font-display: "Roboto Condensed", "Arial Narrow", "Impact", ui-sans-serif;
+  --font-body: "Roboto", "Arial", ui-sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace;
+
+  /* Scale typographique — titres très grands, très gras */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+  --text-7xl: 4.5rem; /* 72px */
+  --text-8xl: 6rem; /* 96px */
+  --text-9xl: 8rem; /* 128px */
+
+  /* ──────────────────────────────────────────
+     ESPACEMENT & LAYOUT
+     ────────────────────────────────────────── */
+
+  --spacing-px: 1px;
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+
+  /* ──────────────────────────────────────────
+     BORDER RADIUS
+     Marvel = presque aucun arrondi, cuts tranchants
+     ────────────────────────────────────────── */
+
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px; /* Rare, utilisé sur les badges */
+  --radius-lg: 6px;
+  --radius-full: 9999px; /* Pills uniquement */
+
+  /* ──────────────────────────────────────────
+     OMBRES — profondes, dramatiques
+     ────────────────────────────────────────── */
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.7), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.8), 0 4px 6px -4px rgb(0 0 0 / 0.6);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.85), 0 8px 10px -6px rgb(0 0 0 / 0.7);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.95);
+
+  /* Glow rouge — signature Marvel */
+  --shadow-glow-red: 0 0 20px 4px rgb(237 29 36 / 0.4);
+  --shadow-glow-gold: 0 0 20px 4px rgb(240 180 41 / 0.35);
+  --shadow-glow-arc: 0 0 20px 4px rgb(79 195 247 / 0.35);
+
+  /* ──────────────────────────────────────────
+     ANIMATIONS
+     ────────────────────────────────────────── */
+
+  --animate-pulse-red: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-flicker: flicker 0.15s ease-in-out;
+
+  @keyframes pulse-red {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(237 29 36 / 0);
+    }
+    50% {
+      box-shadow: 0 0 20px 8px rgb(237 29 36 / 0.35);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+}
+
+/* ──────────────────────────────────────────
+   UTILITIES PERSONNALISÉES
+   ────────────────────────────────────────── */
+
+@utility marvel-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+
+@utility marvel-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-marvel-500);
+}
+
+@utility marvel-hero-text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  font-size: clamp(3rem, 10vw, 8rem);
+}
+
+/* Cut diagonal — signature visuelle Marvel */
+@utility clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 97% 100%, 0 100%);
+}
+
+@utility clip-diagonal-reverse {
+  clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%, 0 10%);
+}
+
+@utility clip-slash {
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+}
+
+/* Card Marvel — fond sombre, bordure subtile */
+@utility marvel-card {
+  background-color: var(--color-steel-800);
+  border: 1px solid var(--color-steel-600);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+
+  &:hover {
+    border-color: var(--color-marvel-600);
+    box-shadow: var(--shadow-glow-red);
+  }
+}
+
+/* Badge rating/classif */
+@utility marvel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid currentColor;
+}
+
+/* Bouton principal — rouge Marvel */
+@utility btn-marvel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--text-sm);
+  padding: 10px 24px;
+  background-color: var(--color-marvel-500);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+
+  &:hover {
+    background-color: var(--color-marvel-600);
+    box-shadow: var(--shadow-glow-red);
+  }
+
+  &:active {
+    background-color: var(--color-marvel-700);
+    transform: scale(0.98);
+  }
+}
+
+/* Bouton secondaire — outline */
+@utility btn-marvel-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--text-sm);
+  padding: 9px 24px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+
+  &:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Séparateur rouge — ligne de rupture Marvel */
+@utility marvel-divider {
+  height: 3px;
+  background-color: var(--color-marvel-500);
+  border: none;
+  width: 100%;
+}
+
+/* Accent vertical gauche — style sidebar/quote Marvel */
+@utility marvel-accent-left {
+  border-left: 4px solid var(--color-marvel-500);
+  padding-left: 1rem;
+}
+
+/* Overlay de dégradé sur images hero */
+@utility marvel-overlay {
+  background: linear-gradient(
+    to top,
+    rgb(13 13 13 / 0.95) 0%,
+    rgb(13 13 13 / 0.5) 40%,
+    rgb(13 13 13 / 0.1) 70%,
+    transparent 100%
+  );
+}
+
+/* Overlay latéral — variante pour cards paysage */
+@utility marvel-overlay-side {
+  background: linear-gradient(
+    to right,
+    rgb(13 13 13 / 0.95) 0%,
+    rgb(13 13 13 / 0.6) 50%,
+    transparent 100%
+  );
+}
+
+/* Fond texturé — bruit subtil comme sur marvel.com */
+@utility marvel-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ──────────────────────────────────────────
+   BASE — fond Marvel par défaut
+   ────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void-700);
+    color: #ffffff;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+
+  ::selection {
+    background-color: var(--color-marvel-500);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-marvel-500);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar — style sombre */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-void-800);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-steel-600);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-marvel-600);
+  }
+}
