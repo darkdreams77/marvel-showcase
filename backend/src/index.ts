@@ -1,18 +1,21 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 import { config } from "./config/env";
 
 import charactersRoutes from "./routes/characters";
 import comicsRoutes from "./routes/comics";
-import loginRoutes from "./routes/login";
+import authRoutes from "./routes/auth";
+import favoritesRoutes from "./routes/favorites";
 
 const app = express();
 const PORT = config.port || 3000;
 
 app.use(cors({ origin: config.originURL }));
 app.use(express.json());
+app.use(cookieParser());
 
 mongoose
   .connect(config.mongodbUri)
@@ -24,13 +27,16 @@ app.get("/api/health", (_req, res) => {
 });
 
 // ------ LOGIN ------ //
-app.use(loginRoutes);
+app.use("/api/user", authRoutes);
 
 // ------ CHARACTERS ------ //
-app.use(charactersRoutes);
+app.use("/api", charactersRoutes);
 
 // ------ COMICS ------ //
-app.use(comicsRoutes);
+app.use("/api", comicsRoutes);
+
+// ------ FAVORITES ------ //
+app.use("/api", favoritesRoutes);
 
 app.all(/.*/, (req, res) => {
   res.status(400).json({ message: "Page not found" });

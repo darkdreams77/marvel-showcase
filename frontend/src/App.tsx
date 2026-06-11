@@ -1,19 +1,34 @@
-import { useEffect, useState } from "react";
-import type { ApiResponse } from "@marvel-showcase/shared";
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Auth } from "./pages/Auth";
+import { Layout } from "./components/Layout";
+import { Characters } from "./pages/Characters";
+import { Comics } from "./pages/Comics";
+import { Favorites } from "./pages/Favorites";
+import { Character } from "./pages/Character";
+import { Comic } from "./pages/Comic";
 
 function App() {
-  const [status, setStatus] = useState("...");
+  // const [status, setStatus] = useState("...");
 
-  useEffect(() => {
-    fetch("/api/health")
-      .then((r) => r.json())
-      .then((res: ApiResponse<string>) => setStatus(res.data ?? "no data"));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/health")
+  //     .then((r) => r.json())
+  //     .then((res: ApiResponse<string>) => setStatus(res.data ?? "no data"));
+  // }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <p className="text-2xl font-bold">Backend status : {status}</p>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index path="/" element={<Home />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/personnages" element={<Characters />} />
+        <Route path="/personnage/:id" element={<Character />} />
+        <Route path="/comics" element={<Comics />} />
+        <Route path="/comic/:id" element={<Comic />} />
+        <Route path="/favoris" element={<Favorites />} />
+      </Route>
+    </Routes>
   );
 }
 

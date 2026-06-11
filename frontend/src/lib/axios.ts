@@ -34,6 +34,17 @@ export async function apiGetPaginated<T>(
   return data;
 }
 
+export async function apiGetAuth<T>(
+  url: string,
+  config?: AxiosRequestConfig,
+): Promise<ApiResponse<T>> {
+  const { data } = await api.get<ApiResponse<T>>(url, {
+    ...config,
+    withCredentials: true,
+  });
+  return data;
+}
+
 // POST
 export async function apiPost<TBody, TResponse>(
   url: string,
@@ -41,6 +52,18 @@ export async function apiPost<TBody, TResponse>(
   config?: AxiosRequestConfig,
 ): Promise<ApiResponse<TResponse>> {
   const { data } = await api.post<ApiResponse<TResponse>>(url, body, config);
+  return data;
+}
+
+export async function apiPostAuth<TBody, TResponse>(
+  url: string,
+  body: TBody,
+  config?: AxiosRequestConfig,
+): Promise<ApiResponse<TResponse>> {
+  const { data } = await api.post<ApiResponse<TResponse>>(url, body, {
+    ...config,
+    withCredentials: true,
+  });
   return data;
 }
 

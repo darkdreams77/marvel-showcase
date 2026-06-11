@@ -9,4 +9,6 @@ export const config = {
   marvelApiKey: process.env.MARVEL_APIKEY!,
   marvelURL: process.env.MARVEL_API_URL!,
   originURL: process.env.ORIGIN_URL!,
+  jwtSecret: process.env.JWT_SECRET!,
+  nodeEnv: process.env.NODE_ENV || "development",
 } as const;

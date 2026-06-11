@@ -5,6 +5,7 @@
    ============================================================ */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 @theme {
   /* ──────────────────────────────────────────
@@ -89,6 +90,7 @@
   --text-xs: 0.75rem; /* 12px */
   --text-sm: 0.875rem; /* 14px */
   --text-base: 1rem; /* 16px */
+  --text-md: 1rem; /* 16px */
   --text-lg: 1.125rem; /* 18px */
   --text-xl: 1.25rem; /* 20px */
   --text-2xl: 1.5rem; /* 24px */
@@ -220,6 +222,25 @@
   font-size: clamp(3rem, 10vw, 8rem);
 }
 
+@utility underline-hover {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-marvel-500);
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
 /* Cut diagonal — signature visuelle Marvel */
 @utility clip-diagonal {
   clip-path: polygon(0 0, 100% 0, 100% 90%, 97% 100%, 0 100%);
@@ -324,6 +345,18 @@
   &:hover {
     border-color: #ffffff;
     background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &:disabled {
+    border-color: var(--color-steel-600);
+    color: var(--color-steel-600);
+
+    &:hover {
+      border-color: var(--color-steel-600);
+      color: var(--color-steel-600);
+      background-color: transparent;
+      cursor: default;
+    }
   }
 }
 
