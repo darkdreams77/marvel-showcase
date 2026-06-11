@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd .. && pnpm --filter shared build && pnpm --filter frontend build",
+  "outputDirectory": "dist",
+  "installCommand": "cd .. && pnpm install"
+}
