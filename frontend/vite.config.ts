@@ -7,6 +7,8 @@ export default ({ mode }: { mode: string }) => {
 
   const API_URL = `${env.VITE_BFF_URL ?? "http://localhost:3000"}`;
 
+  console.log("API_URL", API_URL);
+
   return defineConfig({
     plugins: [react(), tailwindcss()],
 
