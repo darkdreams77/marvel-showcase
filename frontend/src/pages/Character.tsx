@@ -41,7 +41,7 @@ export const Character = () => {
           className="object-cover w-full max-h-full min-h-full opacity-20"
         />
       </div>
-      <div className="w-1/2 p-20">
+      <div className="w-1/2 h-[calc(100vh-70px)] px-20 py-16 flex flex-col">
         <button onClick={goBack} className="mb-20 btn-marvel-outline">
           Page précédente
         </button>
@@ -59,7 +59,9 @@ export const Character = () => {
             <>
               <hr className="marvel-divider" />
               <li>
-                <div className="mb-6 marvel-title">Comics où il apparait :</div>
+                <div className="mb-6 marvel-title">
+                  Comics où ce personnage apparait :
+                </div>
                 <div className="overflow-auto h-180">
                   {character?.comics.map((comic) => (
                     <ComicCover {...comic} />

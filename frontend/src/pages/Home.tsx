@@ -1,3 +1,5 @@
+import { Container } from "../components/Layout/Container";
+
 export const Home = () => {
-  return <div>Home</div>;
+  return <Container className="py-10">Home</Container>;
 };
