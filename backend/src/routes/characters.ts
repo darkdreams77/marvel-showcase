@@ -5,7 +5,7 @@ import {
   PreviewCharacterType,
 } from "@marvel-showcase/shared/src/characters";
 
-import { apiGet, apiGetPaginated } from "../lib/axios";
+import { apiGet } from "../lib/axios";
 import { config } from "../config/env";
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.get("/characters", async (req, res) => {
     if (page) filters += `&skip=${skip}`;
     if (limit) filters += `&limit=${limit}`;
 
-    const data = await apiGetPaginated<CharactersType>(
+    const data = await apiGet<CharactersType>(
       `/characters?apiKey=${API_KEY}${filters}`,
     );
 
