@@ -1,8 +1,14 @@
+import { Link } from "react-router-dom";
+
 import type { PreviewCharacterType } from "@marvel-showcase/shared/src/characters";
 import { StandardAspectRatio } from "@marvel-showcase/shared/src/image";
 
 import { constructUrlImg } from "../../utils/constructUrlImg";
-import { Link } from "react-router-dom";
+import LoadingImg from "../../assets/loading.jpg";
+
+type CharacterCardProps = {
+  isLoading: boolean;
+} & PreviewCharacterType;
 
 export const CharacterCard = ({
   thumbnail,
@@ -10,17 +16,22 @@ export const CharacterCard = ({
   comics,
   description,
   name,
-}: PreviewCharacterType) => {
+  isLoading,
+}: CharacterCardProps) => {
   return (
     <Link to={`/personnage/${_id}`} className="h-full">
       <li className="h-full cursor-pointer marvel-card group">
         <div className="w-full overflow-hidden h-100">
           <img
-            src={constructUrlImg(
-              thumbnail.path,
-              thumbnail.extension,
-              StandardAspectRatio.XLARGE,
-            )}
+            src={
+              isLoading
+                ? LoadingImg
+                : constructUrlImg(
+                    thumbnail.path,
+                    thumbnail.extension,
+                    StandardAspectRatio.XLARGE,
+                  )
+            }
             className="object-cover w-full transition-all h-100 group-hover:scale-120 hover:opacity-75 "
           />
         </div>

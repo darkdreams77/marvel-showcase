@@ -1,4 +1,5 @@
 import type { ChangeEvent } from "react";
+import { cn } from "../../helpers/cn";
 
 type InputProps = {
   type: React.HTMLInputTypeAttribute;
@@ -7,6 +8,7 @@ type InputProps = {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   autoComplete?: React.HTMLInputAutoCompleteAttribute;
+  className?: string;
 };
 
 export const Input = ({
@@ -16,6 +18,7 @@ export const Input = ({
   value,
   onChange,
   autoComplete = "off",
+  className,
 }: InputProps) => {
   return (
     <label htmlFor={id} className="flex flex-col marvel-title">
@@ -24,7 +27,10 @@ export const Input = ({
         type={type}
         id={id}
         name={id}
-        className="p-2 mt-1 not-italic font-normal rounded-sm bg-void-500 font-body"
+        className={cn(
+          "p-2 mt-1 not-italic font-normal rounded-sm bg-void-500 font-body",
+          className ? className : "",
+        )}
         value={value}
         onChange={onChange}
         autoComplete={autoComplete}

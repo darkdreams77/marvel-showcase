@@ -58,6 +58,7 @@ export const Characters = () => {
           label="Rechercher un personnage"
           value={name}
           onChange={searchName}
+          className="w-full p-4"
         />
       </div>
       <Pagination
@@ -68,12 +69,21 @@ export const Characters = () => {
         count={count}
       />
       {isLoading ? (
-        <>en cours de chargement...</>
+        <div className="grid grid-cols-4 gap-6 my-20">
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+        </div>
       ) : (
         <ul className="grid grid-cols-4 gap-6 my-20">
           {characters &&
             characters.map((character) => (
-              <CharacterCard key={character._id} {...character} />
+              <CharacterCard
+                key={character._id}
+                {...character}
+                isLoading={isLoading}
+              />
             ))}
         </ul>
       )}

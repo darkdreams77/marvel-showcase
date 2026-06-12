@@ -14,7 +14,7 @@ export const Header = () => {
             <img src={Logo} alt="Logo Marvel" className="w-24" />
           </Link>
         </div>
-        <nav className="flex gap-10">
+        <nav className="flex items-center gap-10">
           <Link
             to="/personnages"
             className="cursor-pointer marvel-title underline-hover"
@@ -43,11 +43,8 @@ export const Header = () => {
               </button>
             </>
           ) : (
-            <Link
-              to="/login"
-              className="cursor-pointer marvel-title underline-hover"
-            >
-              Mon compte
+            <Link to="/login" className="cursor-pointer btn-marvel">
+              Se connecter / S'inscrire
             </Link>
           )}
         </nav>

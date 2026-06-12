@@ -6,7 +6,7 @@ import {
 } from "@marvel-showcase/shared/src/comics";
 import { CompleteCharacterType } from "@marvel-showcase/shared/src/characters";
 
-import { apiGet, apiGetPaginated } from "../lib/axios";
+import { apiGet } from "../lib/axios";
 import { config } from "../config/env";
 
 const router = express.Router();
@@ -27,7 +27,7 @@ router.get("/comics", async (req, res) => {
     if (page) filters += `&skip=${skip}`;
     if (limit) filters += `&limit=${limit}`;
 
-    const data = await apiGetPaginated<ComicsType>(
+    const data = await apiGet<ComicsType>(
       `/comics?apiKey=${API_KEY}${filters}`,
     );
 
@@ -44,7 +44,7 @@ router.get("/comics/:characterId", async (req, res) => {
   try {
     const { characterId } = req.params;
 
-    const data = await apiGetPaginated<CompleteCharacterType>(
+    const data = await apiGet<CompleteCharacterType>(
       `/comics/${characterId}?apiKey=${API_KEY}`,
     );
     res.status(200).json({ success: true, data });

@@ -403,6 +403,245 @@
 }
 
 /* ──────────────────────────────────────────
+   SKELETONS
+   Animation de chargement — fond void, shimmer
+   orienté de gauche à droite en diagonale
+   ────────────────────────────────────────── */
+
+@theme {
+  --animate-skeleton-shimmer: skeleton-shimmer 1.6s ease-in-out infinite;
+
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+}
+
+/* Mixin interne — appliqué à tous les éléments skeleton */
+@utility skeleton {
+  background: linear-gradient(
+    105deg,
+    var(--color-steel-800) 35%,
+    var(--color-steel-700) 50%,
+    var(--color-steel-800) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Skeleton card ─────────────────────────
+   Miroir exact de .mv-card : thumb + body
+   Usage : <div class="skeleton-card"></div>
+   ────────────────────────────────────────── */
+
+@utility skeleton-card {
+  background: var(--color-steel-800);
+  border: 1px solid var(--color-steel-600);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+
+  /* Thumb — remplace l'image */
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(
+      105deg,
+      var(--color-steel-700) 35%,
+      var(--color-steel-600) 50%,
+      var(--color-steel-700) 65%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-skeleton-shimmer);
+  }
+
+  /* Body — remplace le texte interne */
+  &::after {
+    content: "";
+    display: block;
+    margin: 10px 10px 12px;
+    height: 32px;
+    background: linear-gradient(
+      105deg,
+      var(--color-steel-700) 35%,
+      var(--color-steel-600) 50%,
+      var(--color-steel-700) 65%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-skeleton-shimmer);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ── Skeleton card — variante portrait (affiches) ──
+   aspect-ratio 2/3 pour les covers de comics
+   ────────────────────────────────────────── */
+
+@utility skeleton-card-portrait {
+  background: var(--color-steel-800);
+  border: 1px solid var(--color-steel-600);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background: linear-gradient(
+      105deg,
+      var(--color-steel-700) 35%,
+      var(--color-steel-600) 50%,
+      var(--color-steel-700) 65%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-skeleton-shimmer);
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    margin: 8px 8px 10px;
+    height: 24px;
+    background: linear-gradient(
+      105deg,
+      var(--color-steel-700) 35%,
+      var(--color-steel-600) 50%,
+      var(--color-steel-700) 65%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-skeleton-shimmer);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ── Skeleton textes ───────────────────────
+   Lignes de texte génériques.
+   Usage : <div class="skeleton-text-title"></div>
+           <div class="skeleton-text-lg"></div>
+           <div class="skeleton-text-sm w-3/4"></div>
+   ────────────────────────────────────────── */
+
+/* Titre display (Roboto Condensed condensé) — hauteur calée sur line-height 0.88 */
+@utility skeleton-text-title {
+  height: 2.5rem; /* ~40px, équivaut à un h2 display */
+  background: linear-gradient(
+    105deg,
+    var(--color-steel-700) 35%,
+    var(--color-steel-600) 50%,
+    var(--color-steel-700) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+  width: 70%;
+}
+
+/* Eyebrow / label capsule */
+@utility skeleton-text-eyebrow {
+  height: 0.625rem; /* 10px */
+  width: 5rem;
+  background: linear-gradient(
+    105deg,
+    var(--color-marvel-900) 35%,
+    var(--color-marvel-800) 50%,
+    var(--color-marvel-900) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+}
+
+/* Ligne de corps — taille base (16px) */
+@utility skeleton-text-base {
+  height: 0.875rem;
+  background: linear-gradient(
+    105deg,
+    var(--color-steel-700) 35%,
+    var(--color-steel-600) 50%,
+    var(--color-steel-700) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+  width: 100%;
+}
+
+/* Ligne de corps — petite (13px) */
+@utility skeleton-text-sm {
+  height: 0.6875rem;
+  background: linear-gradient(
+    105deg,
+    var(--color-steel-700) 35%,
+    var(--color-steel-600) 50%,
+    var(--color-steel-700) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+  width: 100%;
+}
+
+/* Bloc de paragraphe — 3 lignes prêtes à l'emploi
+   Usage : <div class="skeleton-paragraph"></div>
+   ────────────────────────────────────────── */
+
+@utility skeleton-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &::before,
+  &::after,
+  & > span {
+    content: "";
+    display: block;
+    height: 0.875rem;
+    background: linear-gradient(
+      105deg,
+      var(--color-steel-700) 35%,
+      var(--color-steel-600) 50%,
+      var(--color-steel-700) 65%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-skeleton-shimmer);
+    border-radius: var(--radius-sm);
+  }
+
+  &::before {
+    width: 100%;
+  }
+  & > span {
+    width: 100%;
+  } /* ligne centrale via <span> vide */
+  &::after {
+    width: 60%;
+  } /* dernière ligne plus courte */
+}
+
+/* Badge skeleton */
+@utility skeleton-badge {
+  display: inline-block;
+  height: 1.25rem;
+  width: 4rem;
+  background: linear-gradient(
+    105deg,
+    var(--color-steel-700) 35%,
+    var(--color-steel-600) 50%,
+    var(--color-steel-700) 65%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-skeleton-shimmer);
+  border-radius: var(--radius-sm);
+}
+
+/* ──────────────────────────────────────────
    BASE — fond Marvel par défaut
    ────────────────────────────────────────── */
 

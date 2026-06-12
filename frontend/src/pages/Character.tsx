@@ -6,10 +6,15 @@ import { constructUrlImg } from "../utils/constructUrlImg";
 import { PortraitAspectRatio } from "@marvel-showcase/shared/src/image";
 import { ComicCover } from "../components/molecules/ComicCover";
 import { getComicsFromCharacterId } from "../services/getComicsFromCharacterId";
+import { useAuth } from "../context/AuthContext";
 
 export const Character = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+
+  console.log("user", user);
 
   const [character, setCharacter] = useState<CompleteCharacterType>();
 
@@ -42,9 +47,19 @@ export const Character = () => {
         />
       </div>
       <div className="w-1/2 h-[calc(100vh-70px)] px-20 py-16 flex flex-col">
-        <button onClick={goBack} className="mb-20 btn-marvel-outline">
-          Page précédente
-        </button>
+        <div className="flex justify-between">
+          <button onClick={goBack} className="mb-20 btn-marvel-outline">
+            Page précédente
+          </button>
+          {user && (
+            <button
+              onClick={() => console.log("go to fav")}
+              className="mb-20 btn-marvel-outline"
+            >
+              Mettre en favori
+            </button>
+          )}
+        </div>
         <ul className="flex flex-col gap-10 text-2xl">
           <li>
             <span className="marvel-title">Nom :</span> {character?.name}

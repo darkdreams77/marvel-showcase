@@ -10,6 +10,11 @@ export const ComicCover = ({
   description,
   title,
 }: PreviewComicType) => {
+  const parser = new DOMParser();
+  const htmlDoc = parser.parseFromString(description, "text/html");
+
+  console.log("htmlDoc", htmlDoc.body);
+
   return (
     <Link to={`/comic/${_id}`}>
       <div className="flex items-center gap-6 mb-4 hover:bg-void-500">
@@ -23,8 +28,8 @@ export const ComicCover = ({
         />
         <div className="pr-4">
           <div className="mb-3 text-md marvel-title">{title}</div>
-          <p className="text-sm marvel-accent-left line-clamp-3">
-            {description}
+          <p className="text-sm whitespace-pre-line marvel-accent-left line-clamp-3">
+            {htmlDoc.body.innerHTML ? htmlDoc.body.innerHTML : description}
           </p>
         </div>
       </div>

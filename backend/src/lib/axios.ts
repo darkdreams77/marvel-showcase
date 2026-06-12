@@ -28,15 +28,6 @@ export async function apiGet<T>(
   return data;
 }
 
-// GET paginé
-export async function apiGetPaginated<T>(
-  url: string,
-  config?: AxiosRequestConfig,
-): Promise<PaginatedResponse<T>> {
-  const { data } = await api.get<PaginatedResponse<T>>(url, config);
-  return data;
-}
-
 // POST
 export async function apiPost<TBody, TResponse>(
   url: string,

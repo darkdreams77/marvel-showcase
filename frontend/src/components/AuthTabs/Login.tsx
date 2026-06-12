@@ -11,15 +11,21 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState("");
 
   const handleFormLogin = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       await handleLogin(username, email, password);
+      setIsLoading(false);
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
+        setIsLoading(false);
+        setErrors(error.message);
         console.error(error.message);
       }
     }
@@ -63,7 +69,13 @@ export const Login = () => {
           }
         />
 
-        <button type="submit" className="mt-4 btn-marvel">
+        {errors && <div className="text-marvel-500">{errors}</div>}
+
+        <button
+          type="submit"
+          className="mt-4 btn-marvel basis-0"
+          disabled={isLoading}
+        >
           Se connecter
         </button>
       </form>
