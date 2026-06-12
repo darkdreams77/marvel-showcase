@@ -3,11 +3,10 @@ import type { AxiosRequestConfig } from "axios";
 import type { ApiResponse, PaginatedResponse } from "@marvel-showcase/shared";
 
 export const api = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.VITE_BFF_URL ?? "/api",
   headers: { "Content-Type": "application/json" },
 });
 
-// Intercepteur : unwrap automatique ou throw sur success: false
 api.interceptors.response.use(
   (response) => response,
   (error) => {
