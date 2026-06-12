@@ -1,5 +1,6 @@
 {
   "buildCommand": "cd .. && pnpm --filter shared build && pnpm --filter frontend build",
   "outputDirectory": "dist",
-  "installCommand": "cd .. && pnpm install"
+  "installCommand": "cd .. && pnpm install",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
