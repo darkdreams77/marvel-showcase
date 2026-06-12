@@ -11,4 +11,7 @@ export const config = {
   originURL: process.env.ORIGIN_URL!,
   jwtSecret: process.env.JWT_SECRET!,
   nodeEnv: process.env.NODE_ENV || "development",
+  allowedOrigins: (
+    process.env.ALLOWED_ORIGINS ?? "http://localhost:5173"
+  ).split(","),
 } as const;

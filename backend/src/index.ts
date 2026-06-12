@@ -13,7 +13,22 @@ import favoritesRoutes from "./routes/favorites";
 const app = express();
 const PORT = config.port || 3000;
 
-app.use(cors({ origin: config.originURL }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Autorise les appels sans origin (Postman, curl...)
+      if (!origin || config.allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS bloqué pour : ${origin}`));
+      }
+    },
+    credentials: true, // indispensable pour les cookies
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
