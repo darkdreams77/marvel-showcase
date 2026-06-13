@@ -4,11 +4,10 @@ import type { PreviewCharacterType } from "@marvel-showcase/shared/src/character
 import { StandardAspectRatio } from "@marvel-showcase/shared/src/image";
 
 import { constructUrlImg } from "../../utils/constructUrlImg";
-import LoadingImg from "../../assets/loading.jpg";
-
-type CharacterCardProps = {
-  isLoading: boolean;
-} & PreviewCharacterType;
+import { useFavorites } from "../../hooks/useFavorites";
+import { cn } from "../../helpers/cn";
+import { useState } from "react";
+import { FavoriteButton } from "../atoms/FavoriteButton";
 
 export const CharacterCard = ({
   thumbnail,
@@ -16,28 +15,37 @@ export const CharacterCard = ({
   comics,
   description,
   name,
-  isLoading,
-}: CharacterCardProps) => {
+}: PreviewCharacterType) => {
+  const { isFavorite, toggle } = useFavorites();
+
+  const isFav = isFavorite(_id!);
+
+  const thumbnailUrl = constructUrlImg(
+    thumbnail.path,
+    thumbnail.extension,
+    StandardAspectRatio.XLARGE,
+  );
+
   return (
     <Link to={`/personnage/${_id}`} className="h-full">
-      <li className="h-full cursor-pointer marvel-card group">
+      <li className="relative h-full cursor-pointer marvel-card group">
+        <FavoriteButton
+          toggle={toggle}
+          externalId={_id}
+          name={name}
+          type="character"
+          thumbnailUrl={thumbnailUrl}
+          isFavorite={isFav}
+        />
         <div className="w-full overflow-hidden h-100">
           <img
-            src={
-              isLoading
-                ? LoadingImg
-                : constructUrlImg(
-                    thumbnail.path,
-                    thumbnail.extension,
-                    StandardAspectRatio.XLARGE,
-                  )
-            }
+            src={thumbnailUrl}
             className="object-cover w-full transition-all h-100 group-hover:scale-120 hover:opacity-75 "
           />
         </div>
-        <div className="flex flex-col justify-between h-auto gap-4 p-4">
-          <span className="truncate marvel-title">{name}</span>
-          <div className="marvel-badge">
+        <div className="justify-between h-auto p-4">
+          <div className="truncate marvel-title">{name}</div>
+          <div className="my-2 marvel-eyebrow">
             {comics.length} comic
             {comics.length > 1 ? "s" : ""}
           </div>

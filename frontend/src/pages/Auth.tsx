@@ -16,7 +16,7 @@ export const Auth = () => {
         <img src={Bg} className="object-cover w-full min-h-full opacity-20" />
       </div>
       <div className="flex flex-col items-center justify-center w-1/2 h-[calc(100vh-70px)]">
-        <div className="w-3/4">
+        <div className="w-1/2">
           <div className="flex mb-6 ">
             {(["login", "signup"] as AuthTab[]).map((tab) => (
               <button

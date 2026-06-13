@@ -38,9 +38,9 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ username, email });
+  const user = await User.findOne({ email });
   if (!user) {
     return res
       .status(401)
@@ -48,6 +48,7 @@ router.post("/login", async (req, res) => {
   }
 
   const valid = await bcrypt.compare(password, user.password);
+
   if (!valid) {
     return res
       .status(401)
@@ -59,15 +60,15 @@ router.post("/login", async (req, res) => {
   });
 
   res.cookie("token", token, {
-    httpOnly: true, // inaccessible au JS côté client
+    httpOnly: true,
     secure: config.nodeEnv === "production",
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours en ms
+    sameSite: config.nodeEnv === "production" ? "strict" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   res.json({
     success: true,
-    data: { username: user.username, email: user.email },
+    data: { email: user.email },
   });
 });
 
@@ -75,7 +76,7 @@ router.post("/logout", (_req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: config.nodeEnv === "production",
-    sameSite: "strict",
+    sameSite: config.nodeEnv === "production" ? "strict" : "lax",
   });
   res.json({ success: true });
 });
@@ -88,7 +89,10 @@ router.get("/me", requireAuth, async (req: AuthRequest, res) => {
       .status(404)
       .json({ success: false, error: "Utilisateur introuvable" });
   }
-  res.json({ success: true, data: { email: user.email } });
+  res.json({
+    success: true,
+    data: { email: user.email, favorites: user.favorites },
+  });
 });
 
 export default router;

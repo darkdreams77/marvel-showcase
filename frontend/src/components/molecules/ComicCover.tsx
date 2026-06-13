@@ -10,11 +10,6 @@ export const ComicCover = ({
   description,
   title,
 }: PreviewComicType) => {
-  const parser = new DOMParser();
-  const htmlDoc = parser.parseFromString(description, "text/html");
-
-  console.log("htmlDoc", htmlDoc.body);
-
   return (
     <Link to={`/comic/${_id}`}>
       <div className="flex items-center gap-6 mb-4 hover:bg-void-500">
@@ -24,12 +19,12 @@ export const ComicCover = ({
             thumbnail.extension!,
             PortraitAspectRatio.MEDIUM,
           )}
-          className="p-2 border aspect-auto border-marvel-500 max-w-20"
+          className="w-20 h-27.75 p-2 border aspect-auto border-marvel-500"
         />
         <div className="pr-4">
           <div className="mb-3 text-md marvel-title">{title}</div>
           <p className="text-sm whitespace-pre-line marvel-accent-left line-clamp-3">
-            {htmlDoc.body.innerHTML ? htmlDoc.body.innerHTML : description}
+            {description}
           </p>
         </div>
       </div>

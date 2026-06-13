@@ -1,29 +1,43 @@
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAsyncEffect from "../hooks/useAsyncEffect";
-import { useState } from "react";
+
+import {
+  PortraitAspectRatio,
+  StandardAspectRatio,
+} from "@marvel-showcase/shared/src/image";
 import type { CompleteCharacterType } from "@marvel-showcase/shared/src/characters";
+
+import useAsyncEffect from "../hooks/useAsyncEffect";
 import { constructUrlImg } from "../utils/constructUrlImg";
-import { PortraitAspectRatio } from "@marvel-showcase/shared/src/image";
 import { ComicCover } from "../components/molecules/ComicCover";
 import { getComicsFromCharacterId } from "../services/getComicsFromCharacterId";
+import { useFavorites } from "../hooks/useFavorites";
 import { useAuth } from "../context/AuthContext";
 
 export const Character = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const { user } = useAuth();
-
-  console.log("user", user);
+  const { isFavorite, toggle } = useFavorites();
 
   const [character, setCharacter] = useState<CompleteCharacterType>();
+  const thumbnail = constructUrlImg(
+    character?.thumbnail?.path!,
+    character?.thumbnail?.extension!,
+    PortraitAspectRatio.UNCANNY,
+  );
+
+  const thumbnailFav = constructUrlImg(
+    character?.thumbnail?.path!,
+    character?.thumbnail?.extension!,
+    StandardAspectRatio.XLARGE,
+  );
 
   useAsyncEffect(async () => {
     try {
       if (id) {
         const resultCharacter = await getComicsFromCharacterId(id);
         if (resultCharacter.success && resultCharacter.data) {
-          console.log("resultCharacter", resultCharacter);
           setCharacter(resultCharacter.data);
         }
       }
@@ -38,11 +52,7 @@ export const Character = () => {
     <div className="flex h-full">
       <div className="w-1/2 h-[calc(100vh-70px)]">
         <img
-          src={constructUrlImg(
-            character?.thumbnail?.path!,
-            character?.thumbnail?.extension!,
-            PortraitAspectRatio.UNCANNY,
-          )}
+          src={thumbnail}
           className="object-cover w-full max-h-full min-h-full opacity-20"
         />
       </div>
@@ -53,10 +63,26 @@ export const Character = () => {
           </button>
           {user && (
             <button
-              onClick={() => console.log("go to fav")}
+              onClick={() =>
+                toggle({
+                  externalId: character?._id!,
+                  name: character?.name!,
+                  type: "character",
+                  thumbnailUrl: thumbnailFav,
+                })
+              }
               className="mb-20 btn-marvel-outline"
             >
-              Mettre en favori
+              {isFavorite(id!) ? (
+                <>
+                  Retirer des favoris{" "}
+                  <i className="bi bi-heartbreak text-marvel-500" />
+                </>
+              ) : (
+                <>
+                  Ajouter aux favoris <i className="bi bi-heart-fill" />
+                </>
+              )}
             </button>
           )}
         </div>
@@ -78,8 +104,10 @@ export const Character = () => {
                   Comics où ce personnage apparait :
                 </div>
                 <div className="overflow-auto h-180">
-                  {character?.comics.map((comic) => (
-                    <ComicCover {...comic} />
+                  {character?.comics.map((comic, index) => (
+                    <React.Fragment key={`${comic}-${index}`}>
+                      <ComicCover {...comic} />
+                    </React.Fragment>
                   ))}
                 </div>
               </li>

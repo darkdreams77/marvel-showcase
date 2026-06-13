@@ -16,14 +16,13 @@ const PORT = config.port || 3000;
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Autorise les appels sans origin (Postman, curl...)
       if (!origin || config.allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error(`CORS bloqué pour : ${origin}`));
       }
     },
-    credentials: true, // indispensable pour les cookies
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
@@ -51,7 +50,7 @@ app.use("/api", charactersRoutes);
 app.use("/api", comicsRoutes);
 
 // ------ FAVORITES ------ //
-app.use("/api", favoritesRoutes);
+app.use("/api/favorites", favoritesRoutes);
 
 app.all(/.*/, (req, res) => {
   res.status(400).json({ message: "Page not found" });

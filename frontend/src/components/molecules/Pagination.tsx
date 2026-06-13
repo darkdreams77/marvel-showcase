@@ -41,24 +41,28 @@ export const Pagination = ({
     setPage((v) => v + 1);
     nextSearchParams.set("page", String(page + 1));
     setSearchParams(nextSearchParams);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const prevPage = () => {
     setPage((v) => v - 1);
     nextSearchParams.set("page", String(page - 1));
     setSearchParams(nextSearchParams);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const firstPage = () => {
     setPage(1);
     nextSearchParams.set("page", "1");
     setSearchParams(nextSearchParams);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const lastPage = () => {
     setPage(_lastPage);
     nextSearchParams.set("page", String(_lastPage));
     setSearchParams(nextSearchParams);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const changeLimit = (e: ChangeEvent<HTMLSelectElement>) => {

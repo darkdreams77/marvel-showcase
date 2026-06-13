@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
-import type { ApiResponse, PaginatedResponse } from "@marvel-showcase/shared";
+import type { ApiResponse } from "@marvel-showcase/shared";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BFF_URL ?? "/api",
@@ -67,11 +67,34 @@ export async function apiPut<TBody, TResponse>(
   return data;
 }
 
+export async function apiPutAuth<TBody, TResponse>(
+  url: string,
+  body: TBody,
+  config?: AxiosRequestConfig,
+): Promise<ApiResponse<TResponse>> {
+  const { data } = await api.put<ApiResponse<TResponse>>(url, body, {
+    ...config,
+    withCredentials: true,
+  });
+  return data;
+}
+
 // DELETE
 export async function apiDelete<T>(
   url: string,
   config?: AxiosRequestConfig,
 ): Promise<ApiResponse<T>> {
   const { data } = await api.delete<ApiResponse<T>>(url, config);
+  return data;
+}
+
+export async function apiDeleteAuth<T>(
+  url: string,
+  config?: AxiosRequestConfig,
+): Promise<ApiResponse<T>> {
+  const { data } = await api.delete<ApiResponse<T>>(url, {
+    ...config,
+    withCredentials: true,
+  });
   return data;
 }

@@ -7,7 +7,7 @@ export const Header = () => {
   const { user, handleLogout } = useAuth();
 
   return (
-    <header className="bg-void-950 h-17.5 sticky top-0 z-10">
+    <header className="bg-void-950 h-16 sticky top-0 z-80">
       <Container className="flex items-center justify-between py-4">
         <div>
           <Link to="/">

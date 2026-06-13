@@ -68,7 +68,12 @@ export const Comics = () => {
         count={count}
       />
       {isLoading ? (
-        <>en cours de chargement...</>
+        <div className="grid grid-cols-4 gap-6 my-20">
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+        </div>
       ) : (
         <ul className="grid grid-cols-4 gap-6 my-20">
           {comics &&

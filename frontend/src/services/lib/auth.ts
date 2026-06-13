@@ -1,4 +1,4 @@
-import { apiPost, apiPostAuth } from "./axios";
+import { apiPostAuth } from "./axios";
 
 interface LoginBody {
   username: string;
@@ -7,7 +7,6 @@ interface LoginBody {
 }
 
 interface LoginData {
-  username: string;
   email: string;
 }
 
@@ -18,12 +17,12 @@ interface SignupBody {
 }
 
 export async function login(body: LoginBody) {
-  return apiPost<LoginBody, LoginData>("/user/login", body);
+  return apiPostAuth<LoginBody, LoginData>("/user/login", body);
 }
 
 export async function logout() {
-  await apiPost("/user/logout", {});
-  window.location.href = "/login";
+  await apiPostAuth("/user/logout", {}); // ← withCredentials: true
+  window.location.href = "/";
 }
 
 export async function signup(body: SignupBody) {

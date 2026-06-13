@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { apiGetAuth } from "../lib/axios";
-import { login, logout, signup } from "../lib/auth";
+
+import { apiGetAuth } from "../services/lib/axios";
+import { login, logout, signup } from "../services/lib/auth";
 
 interface User {
   email: string;

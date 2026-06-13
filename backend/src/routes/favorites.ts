@@ -1,173 +1,68 @@
 import express from "express";
 
-// import { isAuthenticated } from "../middleware/isAuthenticated";
 import { User } from "../models/User";
 import { AuthRequest, requireAuth } from "../middleware/authRequest";
+import { Favorite } from "../models/Favorite";
 
 const router = express.Router();
 
-router.get("/favorites", requireAuth, async (req: AuthRequest, res) => {
-  console.log("route : GET /favorites");
+router.get("/", requireAuth, async (req: AuthRequest, res) => {
+  const { type } = req.query;
 
-  try {
-    const user = await User.findById(req.userId);
-    return res.status(200).json(user?.favorites);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    return res.status(500).json({ message });
-  }
+  const query = {
+    userId: req.userId,
+    ...(type ? { type } : {}),
+  };
+
+  const favorites = await Favorite.find(query).sort({ createdAt: -1 });
+
+  res.json({ success: true, data: favorites });
 });
 
-router.put(
-  "/favorites/characters/:id",
-  requireAuth,
-  async (req: AuthRequest, res) => {
-    console.log("route : PUT /favorites/characters/:id");
+router.post("/", requireAuth, async (req: AuthRequest, res) => {
+  const { externalId, type, name, thumbnailUrl } = req.body;
 
-    try {
-      const { id } = req.params;
+  try {
+    const favorite = await Favorite.create({
+      userId: req.userId,
+      externalId,
+      type,
+      name,
+      thumbnailUrl,
+    });
 
-      if (!id) {
-        return res.status(400).json({ message: "Bad request " });
-      }
+    await favorite.save();
 
-      const user = await User.findById(req.userId);
-
-      if (!user) {
-        return res.status(400).json({ message: "User does not exist" });
-      }
-
-      if (user.favorites?.characters.includes(id)) {
-        return res
-          .status(400)
-          .json({ message: "Character already in favorites characters" });
-      }
-
-      user.favorites?.characters.push(id);
-
-      await user.save();
-
-      return res.status(200).json(user.favorites?.characters);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      return res.status(500).json({ message });
-    }
-  },
-);
+    res.status(201).json({ success: true, data: favorite });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(500).json({ message });
+  }
+  // return res.status(409).json({ success: false, error: "Déjà en favoris" });
+  // }
+});
 
 router.delete(
-  "/favorites/characters/:id",
+  "/:type/:externalId",
   requireAuth,
   async (req: AuthRequest, res) => {
-    console.log("route : DELETE /favorites/characters/:id");
-
     try {
-      const { id } = req.params;
+      const { externalId, type } = req.params;
 
-      if (!id) {
-        return res.status(400).json({ message: "Bad request " });
+      const favorite = await Favorite.findOneAndDelete({
+        userId: req.userId,
+        externalId,
+        type,
+      });
+
+      if (!favorite) {
+        return res.status(400).json({ message: `${type} is not a favorite` });
       }
 
-      const user = await User.findById(req.userId);
-
-      if (!user) {
-        return res.status(400).json({ message: "User does not exist" });
-      }
-
-      if (!user.favorites?.characters.includes(id)) {
-        return res
-          .status(400)
-          .json({ message: "Character is not in favorites characters" });
-      }
-
-      const index = user.favorites.characters.indexOf(id);
-      if (index > -1) {
-        user.favorites.characters.splice(index, 1);
-      }
-
-      await user.save();
-
-      return res.status(200).json(user.favorites?.characters);
+      res.status(200).json({ success: true, data: `${type} deleted` });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      return res.status(500).json({ message });
-    }
-  },
-);
-
-router.put(
-  "/favorites/comics/:id",
-  requireAuth,
-  async (req: AuthRequest, res) => {
-    console.log("route : PUT /favorites/comics/:id");
-
-    try {
-      const { id } = req.params;
-
-      if (!id) {
-        return res.status(400).json({ message: "Bad request " });
-      }
-
-      const user = await User.findById(req.userId);
-
-      if (!user) {
-        return res.status(400).json({ message: "User does not exist" });
-      }
-
-      if (user.favorites?.comics.includes(id)) {
-        return res
-          .status(400)
-          .json({ message: "Character already in favorites characters" });
-      }
-
-      user.favorites?.comics.push(id);
-
-      await user.save();
-
-      return res.status(200).json(user.favorites?.comics);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      return res.status(500).json({ message });
-    }
-  },
-);
-
-router.delete(
-  "/favorites/comics/:id",
-  requireAuth,
-  async (req: AuthRequest, res) => {
-    console.log("route : DELETE /favorites/comics/:id");
-
-    try {
-      const { id } = req.params;
-
-      if (!id) {
-        return res.status(400).json({ message: "Bad request " });
-      }
-
-      const user = await User.findById(req.userId);
-
-      if (!user) {
-        return res.status(400).json({ message: "User does not exist" });
-      }
-
-      if (!user.favorites?.comics.includes(id)) {
-        return res
-          .status(400)
-          .json({ message: "Character is not in favorites comics" });
-      }
-
-      const index = user.favorites.comics.indexOf(id);
-      if (index > -1) {
-        user.favorites.comics.splice(index, 1);
-      }
-
-      await user.save();
-
-      return res.status(200).json(user.favorites?.comics);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      return res.status(500).json({ message });
+      res.status(500).json({ message });
     }
   },
 );
