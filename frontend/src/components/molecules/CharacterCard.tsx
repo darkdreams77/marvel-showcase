@@ -26,7 +26,7 @@ export const CharacterCard = ({
 
   return (
     <Link to={`/personnage/${_id}`} className="h-full">
-      <li className="relative h-full cursor-pointer marvel-card group">
+      <li className="flex lg:block relative h-full cursor-pointer marvel-card group">
         <FavoriteButtonRounded
           toggle={toggle}
           externalId={_id}
@@ -35,20 +35,22 @@ export const CharacterCard = ({
           thumbnailUrl={thumbnailUrl}
           isFavorite={isFav}
         />
-        <div className="w-full overflow-hidden h-100">
+        <div className="w-1/2 lg:w-full overflow-hidden h-50 lg:h-100">
           <img
             src={thumbnailUrl}
-            className="object-cover w-full transition-all h-100 group-hover:scale-120 hover:opacity-75 "
+            className="object-cover w-full transition-all h-50 lg:h-100 group-hover:scale-120 hover:opacity-75 "
           />
         </div>
-        <div className="justify-between h-auto p-4">
+        <div className="justify-between h-auto p-4 w-1/2 lg:w-full">
           <div className="truncate marvel-title">{name}</div>
           <div className="my-2 marvel-eyebrow">
             {comics.length} comic
             {comics.length > 1 ? "s" : ""}
           </div>
           {description && (
-            <p className="line-clamp-3 marvel-accent-left">{description}</p>
+            <p className="line-clamp-5 lg:line-clamp-3 marvel-accent-left">
+              {description}
+            </p>
           )}
         </div>
       </li>

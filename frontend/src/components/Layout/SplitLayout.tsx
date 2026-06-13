@@ -17,8 +17,10 @@ export const SplitLayout = ({ backgroundImg, children }: SplitLayoutProps) => {
         />
         {isMobile && <div className="marvel-overlay absolute inset-0"></div>}
       </div>
-      <div className="lg:w-1/2 lg:h-full px-6 pt-4 pb-10 md:px-20 md:py-16 flex flex-col justify-center">
-        {children}
+      <div className="w-full lg:w-1/2 lg:h-full flex flex-col justify-center ">
+        <div className="px-6 pt-4 pb-10 md:px-20 md:py-16 overflow-auto h-full">
+          {children}
+        </div>
       </div>
     </div>
   );

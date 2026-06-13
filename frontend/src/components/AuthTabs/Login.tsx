@@ -8,7 +8,6 @@ export const Login = () => {
   const navigate = useNavigate();
   const { handleLogin } = useAuth();
 
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +18,7 @@ export const Login = () => {
     setIsLoading(true);
 
     try {
-      await handleLogin(username, email, password);
+      await handleLogin(email, password);
       setIsLoading(false);
       navigate("/");
     } catch (error) {
@@ -37,17 +36,6 @@ export const Login = () => {
         onSubmit={handleFormLogin}
         className="flex flex-col w-full gap-6 mx-auto md:w-2/3"
       >
-        <Input
-          label="Nom d'utilisateur"
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setUsername(e.target.value)
-          }
-          autoComplete="username"
-        />
-
         <Input
           label="Email"
           type="email"

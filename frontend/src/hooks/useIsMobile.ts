@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 
-export function useIsMobile(MOBILE_BREAKPOINT: number = 768) {
+export function useIsMobile(MOBILE_BREAKPOINT = 768) {
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
@@ -11,6 +12,8 @@ export function useIsMobile(MOBILE_BREAKPOINT: number = 768) {
     };
 
     mql.addEventListener("change", onChange);
+
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
 
     return () => {
       mql.removeEventListener("change", onChange);

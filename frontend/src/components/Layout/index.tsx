@@ -4,9 +4,9 @@ import { Footer } from "./Footer";
 
 export const LayoutFixed = () => {
   return (
-    <div className="h-auto bg-void-950 lg:h-screen lg:marvel-noise">
+    <div className="bg-void-950 min-h-screen lg:marvel-noise">
       <Header />
-      <main className="lg:h-[calc(100vh-128px)] relative overflow-auto">
+      <main className="min-h-[calc(100vh-128px)] relative overflow-auto">
         <Outlet />
       </main>
       <Footer />
@@ -16,9 +16,9 @@ export const LayoutFixed = () => {
 
 export const LayoutLoose = () => {
   return (
-    <div className="min-h-screen marvel-noise">
+    <div className="min-h-screen h-auto marvel-noise">
       <Header />
-      <main className="">
+      <main className="lg:min-h-[calc(100vh-128px)] ">
         <Outlet />
       </main>
       <Footer />

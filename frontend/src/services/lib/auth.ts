@@ -1,7 +1,6 @@
 import { apiPostAuth } from "./axios";
 
 interface LoginBody {
-  username: string;
   email: string;
   password: string;
 }

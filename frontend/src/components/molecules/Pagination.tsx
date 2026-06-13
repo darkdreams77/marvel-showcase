@@ -1,5 +1,6 @@
 import type { ChangeEvent, PropsWithChildren } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 type PaginationProps = {
   page: number;
@@ -32,6 +33,7 @@ export const Pagination = ({
   count,
   displayLimit = true,
 }: PaginationProps) => {
+  const isMobile = useIsMobile();
   const [searchParams, setSearchParams] = useSearchParams();
   const nextSearchParams = new URLSearchParams(searchParams);
 
@@ -72,10 +74,12 @@ export const Pagination = ({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between px-10 xl:p-0">
       {displayLimit && (
-        <div className="flex items-center justify-between w-full mb-10">
-          <div className="w-1/2 text-2xl marvel-title">{count} résultats</div>
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full mb-10">
+          <div className="lg:w-1/2 text-2xl marvel-title">
+            {count} résultats
+          </div>
           <div className="">
             <label htmlFor="nb-results" className="text-xl marvel-title">
               Nombre de résultats par page :{" "}
@@ -100,25 +104,28 @@ export const Pagination = ({
         </div>
       )}
       <Button onClick={firstPage} disabled={page === 1}>
-        <i className="bi bi-chevron-double-left"></i> Page 1
+        <i className="bi bi-chevron-double-left"></i> {!isMobile && <>Page 1</>}
       </Button>
 
       <Button onClick={prevPage} disabled={page === 1}>
-        <i className="bi bi-chevron-left"></i> Page précédente
+        <i className="bi bi-chevron-left"></i>{" "}
+        {!isMobile && <>Page précédente</>}
       </Button>
 
       <div className="flex flex-col items-center text-xl marvel-title">
         <span>
-          Page {page}/{_lastPage}
+          {!isMobile && <>Page</>} {page}/{_lastPage}
         </span>
       </div>
 
       <Button onClick={nextPage} disabled={page === _lastPage}>
-        Page suivante <i className="bi bi-chevron-right"></i>
+        {!isMobile && <>Page suivante</>}{" "}
+        <i className="bi bi-chevron-right"></i>
       </Button>
 
       <Button onClick={lastPage} disabled={page === _lastPage}>
-        Page {_lastPage} <i className="bi bi-chevron-double-right"></i>
+        {!isMobile && <>Page {_lastPage}</>}{" "}
+        <i className="bi bi-chevron-double-right"></i>
       </Button>
     </div>
   );

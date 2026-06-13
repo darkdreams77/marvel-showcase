@@ -51,7 +51,7 @@ export const Comics = () => {
 
   return (
     <Container className="py-10">
-      <div className="w-1/2 mb-10">
+      <div className="w-full lg:w-1/2 px-6 xl:px-0 mb-10">
         <Input
           type="text"
           id="searchName"
@@ -68,14 +68,14 @@ export const Comics = () => {
         count={count}
       />
       {isLoading ? (
-        <div className="grid grid-cols-4 gap-6 my-20">
-          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
-          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
-          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
-          <div className="h-full cursor-pointer skeleton-card-portrait marvel-card " />
+        <div className="grid grid-cols-1 md:grid-cols-2 px-6 xl:px-0 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-20">
+          <div className="h-100 xl:h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-100 xl:h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-100 xl:h-full cursor-pointer skeleton-card-portrait marvel-card " />
+          <div className="h-100 xl:h-full cursor-pointer skeleton-card-portrait marvel-card " />
         </div>
       ) : (
-        <ul className="grid grid-cols-4 gap-6 my-20">
+        <ul className="grid grid-cols-1 md:grid-cols-2 px-6 xl:px-0 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-20">
           {comics &&
             comics.map((comic) => <ComicCard {...comic} key={comic._id} />)}
         </ul>

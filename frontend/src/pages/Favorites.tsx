@@ -41,11 +41,11 @@ export const Favorites = () => {
       : favorites?.filter((p) => categoryFilters.has(p.type));
 
   return (
-    <Container className="py-20">
+    <Container className="px-6 py-10 xl:px-0">
       <h2 className="mb-6 text-3xl marvel-title">Mes favoris</h2>
       <p className="flex gap-6 mb-4 marvel-title">
         Filtrer par :{" "}
-        <div className="flex items-center gap-4 ">
+        <div className="flex items-center gap-4">
           <label
             htmlFor="characters"
             className="flex items-center gap-2 cursor-pointer"
@@ -80,7 +80,7 @@ export const Favorites = () => {
       </p>
       <hr className="marvel-divider mb-6" />
       {filteredItems && filteredItems.length > 0 ? (
-        <ul className="grid grid-cols-6 gap-4">
+        <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {filteredItems.map((fav) => (
             <FavoriteCard key={fav._id} {...fav} />
           ))}

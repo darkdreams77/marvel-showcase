@@ -84,7 +84,7 @@ export const Character = () => {
               <div className="mb-6 marvel-title">
                 Comics où ce personnage apparait :
               </div>
-              <div className="overflow-auto h-180">
+              <div className="">
                 {character?.comics.map((comic, index) => (
                   <React.Fragment key={`${comic}-${index}`}>
                     <ComicCover {...comic} />

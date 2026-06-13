@@ -10,11 +10,7 @@ interface User {
 interface AuthContextValue {
   user: User | null;
   isLoading: boolean;
-  handleLogin: (
-    username: string,
-    email: string,
-    password: string,
-  ) => Promise<void>;
+  handleLogin: (email: string, password: string) => Promise<void>;
   handleSignup: (
     username: string,
     email: string,
@@ -38,12 +34,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .finally(() => setIsLoading(false));
   }, []);
 
-  async function handleLogin(
-    username: string,
-    email: string,
-    password: string,
-  ) {
-    const res = await login({ username, email, password });
+  async function handleLogin(email: string, password: string) {
+    const res = await login({ email, password });
     if (res.success && res.data) setUser(res.data);
   }
 

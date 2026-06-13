@@ -42,7 +42,7 @@ export const FavoriteButtonRounded = ({
     <button
       onClick={toggleFavorite}
       className={cn(
-        "absolute z-10 flex items-center justify-center rounded-full cursor-pointer size-10 top-2 right-2 bg-void-700",
+        "absolute z-10 flex items-center justify-center rounded-full cursor-pointer size-10 left-2 lg:left-auto top-2 lg:right-2 bg-void-700",
         pulse ? "animate-ping" : "",
       )}
       onMouseOut={() => setPulse(false)}
