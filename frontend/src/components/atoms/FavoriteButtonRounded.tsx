@@ -4,8 +4,9 @@ import type {
   AddFavoriteBody,
   FavoriteType,
 } from "@marvel-showcase/shared/src/favorites";
+import { GoHeartFill } from "react-icons/go";
 
-type FavoriteButtonProps = {
+type FavoriteButtonRoundedProps = {
   toggle: (item: AddFavoriteBody) => Promise<void>;
   externalId: string;
   name: string;
@@ -14,14 +15,14 @@ type FavoriteButtonProps = {
   isFavorite: boolean;
 };
 
-export const FavoriteButton = ({
+export const FavoriteButtonRounded = ({
   toggle,
   externalId,
   name,
   type,
   thumbnailUrl,
   isFavorite,
-}: FavoriteButtonProps) => {
+}: FavoriteButtonRoundedProps) => {
   const [pulse, setPulse] = useState(false);
 
   const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,9 +48,9 @@ export const FavoriteButton = ({
       onMouseOut={() => setPulse(false)}
     >
       {isFavorite ? (
-        <i className="text-lg bi bi-heart-fill text-marvel-500" />
+        <GoHeartFill className="text-marvel-500" size={22} />
       ) : (
-        <i className="text-lg bi bi-heart-fill" />
+        <GoHeartFill size={20} />
       )}
     </button>
   );

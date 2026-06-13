@@ -378,7 +378,7 @@
 @utility marvel-overlay {
   background: linear-gradient(
     to top,
-    rgb(13 13 13 / 0.95) 0%,
+    var(--color-void-950) 0%,
     rgb(13 13 13 / 0.5) 40%,
     rgb(13 13 13 / 0.1) 70%,
     transparent 100%

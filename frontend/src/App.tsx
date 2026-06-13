@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
-import { Layout } from "./components/Layout";
+import { LayoutFixed, LayoutLoose } from "./components/Layout";
 import { Characters } from "./pages/Characters";
 import { Comics } from "./pages/Comics";
 import { Favorites } from "./pages/Favorites";
@@ -19,13 +19,15 @@ function App() {
 
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<LayoutFixed />}>
         <Route index path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />
-        <Route path="/personnages" element={<Characters />} />
         <Route path="/personnage/:id" element={<Character />} />
-        <Route path="/comics" element={<Comics />} />
         <Route path="/comic/:id" element={<Comic />} />
+      </Route>
+      <Route element={<LayoutLoose />}>
+        <Route path="/personnages" element={<Characters />} />
+        <Route path="/comics" element={<Comics />} />
         <Route path="/favoris" element={<Favorites />} />
       </Route>
     </Routes>

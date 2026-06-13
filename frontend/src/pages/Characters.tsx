@@ -79,11 +79,7 @@ export const Characters = () => {
         <ul className="grid grid-cols-4 gap-6 my-20">
           {characters &&
             characters.map((character) => (
-              <CharacterCard
-                key={character._id}
-                {...character}
-                isLoading={isLoading}
-              />
+              <CharacterCard key={character._id} {...character} />
             ))}
         </ul>
       )}

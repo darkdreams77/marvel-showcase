@@ -5,9 +5,7 @@ import { StandardAspectRatio } from "@marvel-showcase/shared/src/image";
 
 import { constructUrlImg } from "../../utils/constructUrlImg";
 import { useFavorites } from "../../hooks/useFavorites";
-import { cn } from "../../helpers/cn";
-import { useState } from "react";
-import { FavoriteButton } from "../atoms/FavoriteButton";
+import { FavoriteButtonRounded } from "../atoms/FavoriteButtonRounded";
 
 export const CharacterCard = ({
   thumbnail,
@@ -29,7 +27,7 @@ export const CharacterCard = ({
   return (
     <Link to={`/personnage/${_id}`} className="h-full">
       <li className="relative h-full cursor-pointer marvel-card group">
-        <FavoriteButton
+        <FavoriteButtonRounded
           toggle={toggle}
           externalId={_id}
           name={name}

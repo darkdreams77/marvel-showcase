@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { constructUrlImg } from "../../utils/constructUrlImg";
 import { StandardAspectRatio } from "@marvel-showcase/shared/src/image";
 import { useFavorites } from "../../hooks/useFavorites";
-import { FavoriteButton } from "../atoms/FavoriteButton";
+import { FavoriteButtonRounded } from "../atoms/FavoriteButtonRounded";
 
 export const ComicCard = ({
   thumbnail,
@@ -24,7 +24,7 @@ export const ComicCard = ({
   return (
     <Link to={`/comic/${_id}`}>
       <li className="relative h-full cursor-pointer marvel-card group">
-        <FavoriteButton
+        <FavoriteButtonRounded
           toggle={toggle}
           externalId={_id}
           name={title}
