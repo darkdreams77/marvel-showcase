@@ -76,7 +76,7 @@ export const Pagination = ({
   return (
     <div className="flex flex-wrap items-center justify-between px-10 xl:p-0">
       {displayLimit && (
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full mb-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full mb-10 gap-6">
           <div className="lg:w-1/2 text-2xl marvel-title">
             {count} résultats
           </div>

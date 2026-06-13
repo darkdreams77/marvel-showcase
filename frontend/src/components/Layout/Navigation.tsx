@@ -5,7 +5,7 @@ export const Navigation = () => {
   const { user, handleLogout } = useAuth();
 
   return (
-    <nav className="absolute top-16 left-0 w-full md:w-auto bg-void-950 md:relative flex flex-col md:flex-row md:top-0 items-end md:items-center gap-10 p-10 md:p-0">
+    <nav className="absolute top-16 left-0 w-full md:w-auto bg-void-950/80 backdrop-blur-xs md:backdrop-blur-none md:bg-transparent md:relative flex flex-col md:flex-row md:top-0 items-end md:items-center gap-10 p-10 md:p-0">
       <Link
         to="/personnages"
         className="cursor-pointer marvel-title underline-hover"

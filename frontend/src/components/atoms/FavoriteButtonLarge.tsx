@@ -42,7 +42,7 @@ export const FavoriteButtonLarge = ({
   return (
     <button
       onClick={toggleFavorite}
-      className="mb-20 btn-marvel-outline"
+      className="btn-marvel-outline"
       onMouseOut={() => setPulse(false)}
     >
       {isFavorite ? (

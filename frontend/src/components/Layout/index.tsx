@@ -6,7 +6,7 @@ export const LayoutFixed = () => {
   return (
     <div className="bg-void-950 min-h-screen lg:marvel-noise">
       <Header />
-      <main className="min-h-[calc(100vh-128px)] relative overflow-auto">
+      <main className="min-h-[calc(100vh-128px)] lg:h-[calc(100vh-128px)] relative overflow-auto">
         <Outlet />
       </main>
       <Footer />

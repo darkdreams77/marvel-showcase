@@ -12,7 +12,7 @@ export const Header = () => {
   const [displayMobileMenu, setDisplayMobileMenu] = useState(false);
 
   return (
-    <header className="px-4 bg-void-950 h-16 sticky top-0 z-80 border-b border-b-void-500">
+    <header className="px-4 bg-void-950/80 h-16 sticky top-0 z-80 border-b border-b-void-500 backdrop-blur-xs">
       <Container className="flex items-center justify-between h-full">
         <div>
           <Link to="/">

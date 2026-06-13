@@ -52,8 +52,8 @@ export const Character = () => {
 
   return (
     <SplitLayout backgroundImg={thumbnail}>
-      <div className="flex justify-between">
-        <button onClick={goBack} className="mb-20 btn-marvel-outline">
+      <div className="flex flex-col md:flex-row gap-4 justify-between mb-10 md:mb-20">
+        <button onClick={goBack} className="btn-marvel-outline">
           Page précédente
         </button>
         {user && (
